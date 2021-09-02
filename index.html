@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    
+    <div class="container">
+        <input type="text" class="txtb" placeholder="Add a task">
+        <div class="notcomp">
+            <h3>Not completed</h3>
+        </div>
+
+   
+        <div class="comp">
+            <h3>Completed</h3>
+        </div>
+    </div>
+    
+
+<script type="text/javascript">
+
+$(".txtb").keyup(function(e){
+    if(e.keyCode == 13 && $('.txtb').val() != "")
+    {
+        let task = $("<div class='task'></div>");
+        let contentText = $(".txtb").val();
+        
+        task.text(contentText);
+
+        let del = $("<i class='fas fa-trash-alt'></i>").click(function(){
+            let p = $(this).parent();
+
+            //плавно скрываем и удаляем!
+            p.fadeOut(3000, function(){
+                p.remove();
+            });
+        });
+
+        let check =  $("<i class='fas fa-check'></i>").click(function(){
+            let p = $(this).parent();
+            p.fadeOut(function(){
+                $(".comp").append(p);
+                p.fadeIn();
+            });
+            $(this).remove();
+        });
+
+        task.append(del, check);
+        $(".notcomp").append(task);
+
+        // очищаем инпут
+        $(".txtb").val("");
+
+    }
+});
+
+</script>
+
+</body>
+</html>
